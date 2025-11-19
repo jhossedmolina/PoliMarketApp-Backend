@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="PoliMarketApp.API/PoliMarketApp.API.csproj" />
+  <Project Path="PoliMarketApp.Application/PoliMarketApp.Application.csproj" />
+  <Project Path="PoliMarketApp.Domain/PoliMarketApp.Domain.csproj" />
+  <Project Path="PoliMarketApp.Infrastructure/PoliMarketApp.Infrastructure.csproj" />
+</Solution>
