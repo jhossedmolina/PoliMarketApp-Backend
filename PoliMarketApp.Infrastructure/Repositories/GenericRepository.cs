@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PoliMarketApp.Application.Interfaces;
-using PoliMarketApp.Infrastructure.Data;
+using PoliMarketApp.Infrastructure.DataAccess;
 using System.Linq.Expressions;
 
 namespace PoliMarketApp.Infrastructure.Repositories;

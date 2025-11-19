@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PoliMarketApp.Application.Interfaces;
 using PoliMarketApp.Domain.Entities;
-using PoliMarketApp.Infrastructure.Data;
+using PoliMarketApp.Infrastructure.DataAccess;
 
 namespace PoliMarketApp.Infrastructure.Repositories
 {

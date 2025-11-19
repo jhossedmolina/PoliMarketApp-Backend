@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using PoliMarketApp.Domain.Entities;
 
-namespace PoliMarketApp.Infrastructure.Data;
+namespace PoliMarketApp.Infrastructure.DataAccess;
 
 public partial class PoliMarketDbContext : DbContext
 {
