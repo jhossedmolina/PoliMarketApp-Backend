@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using PoliMarketApp.Application.Interfaces;
 using PoliMarketApp.Application.Services;
 using PoliMarketApp.Infrastructure.Data;
@@ -31,6 +30,7 @@ builder.Services.AddScoped<IHumanResourcesService, HumanResourcesService>();
 builder.Services.AddScoped<ISalesService, SalesService>();
 builder.Services.AddScoped<IWarehouseService, WarehouseService>();
 builder.Services.AddScoped<IDeliveryService, DeliveryService>();
+builder.Services.AddScoped<ISupplierService, SupplierService>();
 
 // Register AutoMapper with all mapping profiles
 builder.Services.AddAutoMapper(cfg => { }, typeof(VendorMapping));
@@ -38,6 +38,7 @@ builder.Services.AddAutoMapper(cfg => { }, typeof(ClienteMapping));
 builder.Services.AddAutoMapper(cfg => { }, typeof(ProductoMapping));
 builder.Services.AddAutoMapper(cfg => { }, typeof(PedidoVentaMapping));
 builder.Services.AddAutoMapper(cfg => { }, typeof(OrdenEntregaMapping));
+builder.Services.AddAutoMapper(cfg => { }, typeof(SupplierMapping));
 
 var app = builder.Build();
 

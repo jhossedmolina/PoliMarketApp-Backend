@@ -1,6 +1,7 @@
 using AutoMapper;
 using PoliMarketApp.Application.DTOs;
 using PoliMarketApp.Application.Interfaces;
+using PoliMarketApp.Domain.Entities;
 
 namespace PoliMarketApp.Application.Services;
 
@@ -13,6 +14,24 @@ public class HumanResourcesService : IHumanResourcesService
     {
         _vendedorRepository = vendedorRepository;
         _mapper = mapper;
+    }
+
+    public async Task<VendedorDto?> CreateVendorAsync(CreateVendedorDto vendorDto, CancellationToken cancellationToken = default)
+    {
+        // Verificar si el documento ya existe
+        var existingVendor = await _vendedorRepository.GetByDocumentoAsync(vendorDto.Documento, cancellationToken);
+        if (existingVendor != null)
+            return null;
+
+        var vendor = _mapper.Map<Vendedor>(vendorDto);
+        vendor.Activo = true;
+        vendor.AutorizadoParaOperar = false; // Por defecto no está autorizado
+        vendor.FechaIngreso = DateTime.Now;
+
+        await _vendedorRepository.AddAsync(vendor, cancellationToken);
+        await _vendedorRepository.SaveChangesAsync(cancellationToken);
+
+        return _mapper.Map<VendedorDto>(vendor);
     }
 
     public async Task<bool> AuthorizeVendorAsync(int vendedorId, CancellationToken cancellationToken = default)
@@ -48,6 +67,12 @@ public class HumanResourcesService : IHumanResourcesService
     public async Task<IEnumerable<VendedorDto>> GetAuthorizedVendorsAsync(CancellationToken cancellationToken = default)
     {
         var vendedores = await _vendedorRepository.GetVendedoresAutorizadosAsync(cancellationToken);
+        return _mapper.Map<IEnumerable<VendedorDto>>(vendedores);
+    }
+
+    public async Task<IEnumerable<VendedorDto>> GetAllVendorsAsync(CancellationToken cancellationToken = default)
+    {
+        var vendedores = await _vendedorRepository.GetAllAsync(cancellationToken);
         return _mapper.Map<IEnumerable<VendedorDto>>(vendedores);
     }
 }
